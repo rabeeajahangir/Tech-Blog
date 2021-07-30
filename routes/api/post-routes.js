@@ -5,10 +5,10 @@ const { Post, User } = require('../../models');
 
 // get all users
 router.get('/', (req, res) => {
-    console.log('======================');
+    // console.log('======================');
     Post.findAll({
 
-        attributes: ['id', 'post_url', 'title', 'created_at'],
+        attributes: ['id', 'post_comment', 'title', 'created_at'],
 
         include: [
             {
@@ -54,9 +54,11 @@ router.get('/:id', (req, res) => {
 
   router.post('/', (req, res) => {
     
+    // console.log('making post')
+    // console.log(req.body)
     Post.create({
       title: req.body.title,
-      post_comment: req.body.post_url,
+      post_comment: req.body.post_comment,
       user_id: req.body.user_id
     })
       .then(dbPostData => res.json(dbPostData))
