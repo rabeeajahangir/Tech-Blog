@@ -15,20 +15,12 @@ async function loginFormHandler(event) {
       });
   
       if (response.ok) {
-        document.location.replace('/');
+        document.location.replace('/dashboard');
       } else {
         alert(response.statusText);
       }
     }
   }
-  
-  document.querySelector('.login-form').addEventListener('submit', loginFormHandler);
-
-
-
-
-
-
 
 async function signupFormHandler(event) {
     event.preventDefault();
@@ -54,3 +46,7 @@ async function signupFormHandler(event) {
       }
     }
   }
+
+
+  document.querySelector('.signup-btn').addEventListener('click', signupFormHandler);
+document.querySelector('.login-form').addEventListener('submit', loginFormHandler);

@@ -9,14 +9,14 @@
 </head>
 
 <body>
-
+<div class="wrapper">
   <header>
     <h1>
       <a href="/">The Tech Blog</a>
     </h1>
-    <nav>
+    {{!-- <nav>
       <a href="/login">login</a>
-    </nav>
+    </nav> --}}
 
    <nav>
   {{#if loggedIn}}
@@ -28,7 +28,7 @@
 </nav>
   </header>
 
-  <div class="wrapper">
+  
   
     <main>
       {{{ body }}}
