@@ -1,14 +1,4 @@
-<article class="post">
-  <div class="title">
-    <a href="{{post.post_comment}}" target="_blank">{{post.title}}</a>
-    <span>({{post.comment}})</span>
-  </div>
-  <div class="meta">
-   {{post.user.username}} on {{post.created_at}}
-    |
-    <a href="/post/{{post.id}}">{{post.comments.length}} comment(s)</a>
-  </div>
-</article>
+{{> post-info post }}
 
 <{{#if loggedIn}}
 <form class="comment-form">
@@ -24,3 +14,7 @@
 </form>
 
 {{> comments post.comments}}
+
+{{#if loggedIn}}
+<script src="/javascript/comment.js"></script>
+{{/if}}

@@ -25,24 +25,29 @@ router.get('/:id', (req, res) => {
     include: [
       {
         model: Post,
-        attributes: ['id', 
-        'title', 
-        'post_comment', 
-        'created_at']
+        attributes: ['id', 'title', 'post_comment', 'created_at']
       },
-      // include the Comment model here:
       {
         model: Comment,
-        attributes: ['id', 
-        'comment_text', 
-        'created_at'],
+        attributes: ['id', 'comment_text', 'created_at'],
         include: {
           model: Post,
           attributes: ['title']
         }
-      }
+      },
     ]
-  });
+  })
+    .then(dbUserData => {
+      if (!dbUserData) {
+        res.status(404).json({ message: 'No user found with this id' });
+        return;
+      }
+      res.json(dbUserData);
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json(err);
+    });
 });
 
 router.post('/', (req, res) => {
@@ -67,13 +72,34 @@ router.post('/', (req, res) => {
   });
 });
 
+router.post('/', (req, res) => {
+  
+  User.create({
+    username: req.body.username,
+    email: req.body.email,
+    password: req.body.password
+  })
+    .then(dbUserData => {
+      req.session.save(() => {
+        req.session.user_id = dbUserData.id;
+        req.session.username = dbUserData.username;
+        req.session.loggedIn = true;
+  
+        res.json(dbUserData);
+      });
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json(err);
+    });
+});
 
 //FOR USER TO LOGIN
 
 router.post('/login', (req, res) => {
   User.findOne({
     where: {
-      username: req.body.username
+      email: req.body.username
     }
   }).then(dbUserData => {
     if (!dbUserData) {
@@ -113,6 +139,7 @@ router.post('/logout', (req, res) => {
 // UPDATE USER
 router.put('/:id', (req, res) => {
   User.update(req.body, {
+    individualHooks: true,
     where: {
       id: req.params.id
     }
@@ -151,15 +178,6 @@ router.delete('/:id', (req, res) => {
     });
 });
 
-router.post('/logout', (req, res) => {
-  if (req.session.loggedIn) {
-    req.session.destroy(() => {
-      res.status(204).end();
-    });
-  }
-  else {
-    res.status(404).end();
-  }
-});
+
 
 module.exports = router;
