@@ -71,8 +71,6 @@ router.get('/:id', (req, res) => {
 
   router.post('/', (req, res) => {
     
-    // console.log('making post')
-    // console.log(req.body)
     Post.create({
       title: req.body.title,
       post_comment: req.body.post_comment,
