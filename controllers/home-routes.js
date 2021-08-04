@@ -29,12 +29,7 @@ router.get('/', (req, res) => {
   })
     .then(dbPostData => {
       const postsData = dbPostData.map(post => post.get({ plain: true }));
-    const posts = postsData.map(post => {
-      let temp = post.post_comment.split("\n");
-      post.post_comment = []
-      post.post_comment.push(temp[0].split(" ").splice(0, 50).join(" "));
-      return post;
-    });
+    
       res.render('homepage', {
         posts,
         loggedIn: req.session.loggedIn
@@ -57,7 +52,6 @@ router.get('/post/:id', (req, res) => {
       'post_comment',
       'title',
       'created_at',
-   
     ],
     include: [
       {
@@ -81,8 +75,7 @@ router.get('/post/:id', (req, res) => {
       }
 
       const post = dbPostData.get({ plain: true });
-      let temp = post.post_comment.split("\n");
-    post.post_commment = temp;
+      
       res.render('single-post', {
         post,
         loggedIn: req.session.loggedIn

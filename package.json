@@ -4,8 +4,10 @@
   "main": "server.js",
   "scripts": {
     "test": "jest",
-    "start": "node server.js"
+    "start": "node server.js",
+    "seed": "node/seeds/index.js"
   },
+
   "repository": {
     "type": "git",
     "url": "git+https://github.com/rabeeajahangir/Tech-Blog.git"
