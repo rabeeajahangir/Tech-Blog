@@ -4,22 +4,22 @@ const commentdata = [
   {
     comment_text: 'Nunc rhoncus dui vel sem.',
     user_id: 6,
-    post_id: 1
+    post_id: 2
   },
   {
     comment_text: 'Morbi odio odio, elementum eu, interdum eu, tincidunt in, leo. Maecenas pulvinar lobortis est.',
     user_id: 6,
-    post_id: 8
+    post_id: 4
   },
   {
     comment_text: 'Aliquam erat volutpat. In congue.',
     user_id: 3,
-    post_id: 10
+    post_id: 7
   },
   {
     comment_text: 'Quisque arcu libero, rutrum ac, lobortis vel, dapibus at, diam.',
     user_id: 3,
-    post_id: 18
+    post_id: 6
   },
   {
     comment_text: 'In hac habitasse platea dictumst.',
@@ -29,7 +29,7 @@ const commentdata = [
   {
     comment_text: 'Vivamus vestibulum sagittis sapien.',
     user_id: 1,
-    post_id: 20
+    post_id: 1
   },
 
 ];
